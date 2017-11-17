@@ -1,0 +1,10 @@
+FROM intdocker.cargosmart.com/server/csaczsi:pkg
+
+# set default work directory
+WORKDIR /cs_acz_si
+
+#copy source to workdir
+COPY . /cs_acz_si
+
+# expose the port
+EXPOSE  8889
