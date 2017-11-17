@@ -3,7 +3,7 @@ Docker daemon api
 
 
 ## Configure in your docker daemon
-
+on Linux platform, you can update docker daemon as below:
 ```
 cd /etc/systemd/system/docker.service.d/
 touch tcp.conf
@@ -19,7 +19,7 @@ systemctl restart docker
 
 ## Clone source
 ```
-git clone https://github.com/nightlegend/dockerd.git into your workdir
+git clone https://github.com/nightlegend/dockerd.git
 
 ```
 
