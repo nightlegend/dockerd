@@ -13,8 +13,8 @@ import (
 	"golang.org/x/net/context"
 )
 
-// RunContainer and start a container
-func RunContainer(ctx context.Context, cli *client.Client, cfg *container.Config) {
+// ContainerRun and start a container
+func ContainerRun(ctx context.Context, cli *client.Client, cfg *container.Config) {
 	resp, err := cli.ContainerCreate(ctx, cfg, nil, nil, "")
 	if err != nil {
 		panic(err)
@@ -27,24 +27,24 @@ func RunContainer(ctx context.Context, cli *client.Client, cfg *container.Config
 	log.Println(resp.ID)
 }
 
-// StopContainer is stop a running container.
-func StopContainer(ctx context.Context, cli *client.Client, containerID string) {
+// ContainerStop is stop a running container.
+func ContainerStop(ctx context.Context, cli *client.Client, containerID string) {
 	err := cli.ContainerStop(ctx, containerID, nil)
 	if err != nil {
 		panic(err)
 	}
 }
 
-// StartContainer is start a stop container.
-func StartContainer(ctx context.Context, cli *client.Client, containerID string) {
+// ContainerStart is start a stop container.
+func ContainerStart(ctx context.Context, cli *client.Client, containerID string) {
 	err := cli.ContainerStart(ctx, containerID, types.ContainerStartOptions{})
 	if err != nil {
 		panic(err)
 	}
 }
 
-// ShowContainerLogs is show a container logs.
-func ShowContainerLogs(ctx context.Context, cli *client.Client, containerID string) {
+// ContainerShowLogs is show a container logs.
+func ContainerShowLogs(ctx context.Context, cli *client.Client, containerID string) {
 	options := types.ContainerLogsOptions{ShowStdout: true}
 	// Replace this ID with a container that really exists
 	out, err := cli.ContainerLogs(ctx, containerID, options)
@@ -54,8 +54,8 @@ func ShowContainerLogs(ctx context.Context, cli *client.Client, containerID stri
 	io.Copy(os.Stdout, out)
 }
 
-// RestartContainer is restart a running container.
-func RestartContainer(ctx context.Context, cli *client.Client, containerID string, timeout *time.Duration) {
+// ContainerRestart is restart a running container.
+func ContainerRestart(ctx context.Context, cli *client.Client, containerID string, timeout *time.Duration) {
 	err := cli.ContainerRestart(ctx, containerID, timeout)
 	if err != nil {
 		panic(err)
@@ -72,8 +72,8 @@ func ContainerStats(ctx context.Context, cli *client.Client, containerID string)
 	log.Printf("result is :%s", stats.Body)
 }
 
-// InspectContainer is inspect a container detail information.
-func InspectContainer(ctx context.Context, cli *client.Client, containerID string) {
+// ContainerInspect is inspect a container detail information.
+func ContainerInspect(ctx context.Context, cli *client.Client, containerID string) {
 	result, err := cli.ContainerInspect(ctx, containerID)
 	if err != nil {
 		panic(err)
